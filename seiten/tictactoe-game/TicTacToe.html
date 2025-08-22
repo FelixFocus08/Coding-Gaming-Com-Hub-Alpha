@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="TicTacToe.css">
+
+    <nav>
+        <div class="logo">Tic Tac Toe</div>
+        <ul class="nav-links">
+            <li><a href="index.html">🏚️​Home</a></li>
+        </ul>
+    </nav>
+</head>
+
+<body>
+    <div class="choice-menu" id="choiceMenu">
+    <p>Wähle dein Symbol:</p>
+    <button onclick="chooseSymbol('x')">X</button>
+    <button onclick="chooseSymbol('o')">O</button>
+</div>
+
+<div class="difficulty-menu">
+  <label for="difficultySelect">Schwierigkeit:</label>
+  <select id="difficultySelect">
+    <option value="easy">Einfach</option>
+    <option value="medium">Mittel</option>
+    <option value="hard">Schwer</option>
+    <option value="impossible">Unmöglich</option>
+  </select>
+</div>
+
+<p id="selectedSymbol" class="info-text"></p>
+<div class="board" id="board">
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+</div>
+
+<p id="timer" class="info-text">Zeit: 0 Sekunden</p>
+
+<div class="winning-message" id="winningMessage">
+    <div data-winning-message-text></div>
+</div>
+
+<div class="reset-container">
+    <button class="restartButton" id="restartButton">Neustarten</button>
+</div>
+
+<div id="popupOverlay" class="popup-overlay">
+  <div class="popup-box">
+    <p id="popupText">Gewinner-Nachricht</p>
+    <button onclick="restartFromPopup()">Neustarten</button>
+  </div>
+</div>
+
+    <script src="TicTacToe.js"></script>
+
+</body>
+</html>

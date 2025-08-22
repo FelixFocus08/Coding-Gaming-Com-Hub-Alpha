@@ -1,0 +1,149 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+:root {
+  --bg: #0d0d1a;
+  --text: #f0f0ff;
+  --accent: #7b2ff7;
+  --input-bg: #1a1a33;
+  --border: #444;
+}
+
+.light-mode {
+  --bg: #f5f5ff;
+  --text: #1a1a1a;
+  --accent: #7b2ff7;
+  --input-bg: #ffffff;
+  --border: #ccc;
+}
+
+.app-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  color: var(--accent);
+}
+
+#mode-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.avatar-container {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.avatar-container img {
+  width: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+}
+
+.chat-box {
+  background: var(--input-bg);
+  padding: 1rem;
+  border-radius: 12px;
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+}
+
+.chat-box p {
+  margin: 0.5rem 0;
+}
+
+.chat-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
+}
+
+.chat-input button {
+  padding: 0.75rem 1rem;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.chat-input button:hover {
+  background: #682ed3;
+}
+
+.faq-section {
+  margin-top: 2rem;
+}
+
+.faq-category-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.faq-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.faq-list {
+  background: var(--input-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.training-link {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.training-link a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: 2rem;
+  color: var(--text);
+  opacity: 0.6;
+}

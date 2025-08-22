@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaming News – Gaming & Coding Hub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>Gaming News Zentrale</h1>
+    <p>Bleib auf dem Laufenden mit aktuellen News rund um die Gaming-Welt!</p>
+  </header>
+
+  <main class="news-section">
+    <div class="news-card fade-in">
+      <h2>🎮 Allgemeine Gaming-News</h2>
+      <iframe src="https://www.gamestar.de/news/" width="100%" height="400" loading="lazy"></iframe>
+    </div>
+
+    <div class="news-card fade-in">
+      <h2>🧱 Minecraft News</h2>
+      <iframe src="https://www.minecraft.net/de-de/article" width="100%" height="400" loading="lazy"></iframe>
+    </div>
+
+    <div class="news-card fade-in">
+      <h2>🔧 Roblox News</h2>
+      <iframe src="https://blog.roblox.com/" width="100%" height="400" loading="lazy"></iframe>
+    </div>
+
+    <div class="news-card fade-in">
+      <h2>🎯 Fortnite News</h2>
+      <iframe src="https://www.fortnite.com/news" width="100%" height="400" loading="lazy"></iframe>
+    </div>
+
+    <div class="news-card fade-in">
+      <h2>🕹️ Weitere Game-News</h2>
+      <iframe src="https://www.pcgames.de/news/" width="100%" height="400" loading="lazy"></iframe>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Gaming & Coding Hub. Alle Rechte vorbehalten.</p>
+  </footer>
+
+  <script>
+    // Fade-in beim Scrollen
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in-visible");
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll(".fade-in").forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

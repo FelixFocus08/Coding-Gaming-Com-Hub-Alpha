@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeBreaker - Das Hacker Puzzle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #0f0f0f;
+            font-family: 'Courier New', monospace;
+        }
+        .matrix-bg {
+            background: linear-gradient(180deg, #0f0f0f, #1f1f1f);
+            box-shadow: 0 0 20px #00ff00 inset;
+        }
+        .glow {
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+        }
+        #timer {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00ff00;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="text-green-400 flex items-center justify-center min-h-screen matrix-bg">
+    <div class="w-full max-w-md bg-gray-900 rounded-2xl shadow-lg p-6 border border-green-500">
+        <h1 class="text-3xl font-bold text-green-400 text-center mb-4 glow">CodeBreaker</h1>
+        <div id="timer">⏱️ 0s</div>
+        <p class="text-sm text-green-300 text-center mb-6">Wähle eine Schwierigkeit und knacke den geheimen Code!</p>
+
+        <div class="mb-4">
+            <label for="difficulty" class="block mb-2 text-sm">Schwierigkeitsgrad wählen:</label>
+            <select id="difficulty" class="w-full px-4 py-2 rounded bg-black text-green-400 border border-green-500 mb-4" onchange="setDifficulty()">
+                <option value="4">Einfach (4-stelliger Code)</option>
+                <option value="5">Normal (5-stelliger Code)</option>
+                <option value="6">Pro (6 Zeichen inkl. Buchstaben)</option>
+                <option value="7">Extrem (7 Zeichen inkl. Groß-/Kleinbuchstaben)</option>
+                <option value="8">Unmöglich (8 Zeichen inkl. Sonderzeichen)</option>
+            </select>
+        </div>
+
+        <div id="feedback" class="text-sm text-center mb-4 text-green-300"></div>
+
+        <input id="guessInput" type="text" maxlength="4" placeholder="Dein Code..."
+            class="w-full px-4 py-2 rounded bg-black text-green-400 border border-green-500 focus:outline-none mb-4">
+
+        <button onclick="submitGuess()"
+            class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded">Versuch abschicken</button>
+
+        <button onclick="showHint()"
+            class="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded">Tipp anzeigen</button>
+
+        <button onclick="resetGame()"
+            class="w-full mt-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded">Zurücksetzen</button>
+
+        <div id="hint" class="mt-4 text-sm text-blue-400"></div>
+        <div id="history" class="mt-6 text-sm text-green-300"></div>
+
+        <div class="mt-6">
+            <h2 class="text-lg font-bold mb-2">🏆 Highscore</h2>
+            <ul id="leaderboard" class="text-sm text-green-200"></ul>
+        </div>
+    </div>
+
+    <script>
+        let secretCode = "";
+        let codeLength = 4;
+        let attempts = 0;
+        const maxAttempts = 8;
+        let timer = 0;
+        let timerInterval;
+        let difficultyLevel = "Einfach";
+
+        function generateCode(length) {
+            const charSets = {
+                Einfach: "0123456789",
+                Normal: "0123456789",
+                Pro: "abcdefghijklmnopqrstuvwxyz0123456789",
+                Extrem: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+                Unmöglich: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?"
+            };
+            let chars = charSets[difficultyLevel] || charSets.Einfach;
+            let code = "";
+            for (let i = 0; i < length; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        function setDifficulty() {
+            codeLength = parseInt(document.getElementById("difficulty").value);
+            const levelMap = {"4":"Einfach", "5":"Normal", "6":"Pro", "7":"Extrem", "8":"Unmöglich"};
+            difficultyLevel = levelMap[codeLength] || "Einfach";
+            document.getElementById("guessInput").setAttribute("maxlength", codeLength);
+            document.getElementById("guessInput").placeholder = codeLength + " Zeichen...";
+            resetGame();
+        }
+
+        function resetGame() {
+            secretCode = generateCode(codeLength);
+            attempts = 0;
+            document.getElementById("feedback").innerHTML = "Neues Spiel gestartet. Viel Glück!";
+            document.getElementById("history").innerHTML = "";
+            document.getElementById("hint").innerHTML = "";
+            document.getElementById("guessInput").disabled = false;
+            document.getElementById("guessInput").value = "";
+            document.getElementById("guessInput").focus();
+            clearInterval(timerInterval);
+            timer = 0;
+            document.getElementById("timer").innerText = "⏱️ 0s";
+            timerInterval = setInterval(() => {
+                timer++;
+                document.getElementById("timer").innerText = `⏱️ ${timer}s`;
+            }, 1000);
+            renderLeaderboard();
+        }
+
+        function submitGuess() {
+            const input = document.getElementById("guessInput");
+            let guess = input.value.trim();
+            if (guess.length !== codeLength) {
+                alert(`Bitte gib einen ${codeLength}-stelligen Code ein!`);
+                return;
+            }
+
+            attempts++;
+
+            let newDisplay = "";
+            for (let i = 0; i < codeLength; i++) {
+                if (guess[i] === secretCode[i] && (difficultyLevel === "Einfach" || difficultyLevel === "Normal")) {
+                    newDisplay += secretCode[i];
+                } else {
+                    newDisplay += "";
+                }
+            }
+
+            if ((difficultyLevel === "Einfach" || difficultyLevel === "Normal") && newDisplay.includes(secretCode[0])) {
+                document.getElementById("guessInput").value = newDisplay;
+            }
+
+            let correctPosition = 0;
+            let correctDigit = 0;
+
+            for (let i = 0; i < codeLength; i++) {
+                if (guess[i] === secretCode[i]) {
+                    correctPosition++;
+                } else if (secretCode.includes(guess[i])) {
+                    correctDigit++;
+                }
+            }
+
+            const feedback = `Versuch ${attempts}/${maxAttempts}: ${guess} → ${correctPosition} richtig platziert, ${correctDigit} richtige Ziffer(n) an falscher Stelle.`;
+            document.getElementById("history").innerHTML += `<div>${feedback}</div>`;
+
+            if (guess === secretCode) {
+                clearInterval(timerInterval);
+                document.getElementById("feedback").innerHTML = `🎉 Glückwunsch! Du hast den Code geknackt: <span class='text-green-400'>${secretCode}</span>`;
+                updateLeaderboard(attempts, timer);
+                disableInput();
+            } else if (attempts >= maxAttempts) {
+                clearInterval(timerInterval);
+                document.getElementById("feedback").innerHTML = `💥 Du hast verloren! Der Code war: <span class='text-red-400'>${secretCode}</span>`;
+                disableInput();
+            } else {
+                document.getElementById("feedback").innerHTML = "Finde den Code...";
+            }
+
+            input.value = "";
+            input.focus();
+        }
+
+        function showHint() {
+            const hintIndex = Math.floor(Math.random() * codeLength);
+            const hintDigit = secretCode[hintIndex];
+            document.getElementById("hint").innerHTML = `Tipp: An Position ${hintIndex + 1} befindet sich ein <span class='text-yellow-400'>${hintDigit}</span>.`;
+        }
+
+        function disableInput() {
+            document.getElementById("guessInput").disabled = true;
+            document.getElementById("hint").innerHTML += `<div class='mt-4 text-sm text-gray-300'>Die Lösung war: <span class='text-red-400'>${secretCode}</span>.</div>`;
+        }
+
+        function updateLeaderboard(score, time) {
+            let key = `leaderboard_${difficultyLevel}`;
+            let leaderboard = JSON.parse(localStorage.getItem(key)) || [];
+            leaderboard.push({score: score, time: time});
+            leaderboard.sort((a, b) => a.score - b.score || a.time - b.time);
+            leaderboard = leaderboard.slice(0, 5);
+            localStorage.setItem(key, JSON.stringify(leaderboard));
+            renderLeaderboard();
+        }
+
+        function renderLeaderboard() {
+            let key = `leaderboard_${difficultyLevel}`;
+            const leaderboard = JSON.parse(localStorage.getItem(key)) || [];
+            const lbElement = document.getElementById("leaderboard");
+            lbElement.innerHTML = "";
+            leaderboard.forEach((entry, index) => {
+                lbElement.innerHTML += `<li>${index + 1}. ${entry.score} Versuche – ${entry.time}s</li>`;
+            });
+        }
+
+        setDifficulty();
+    </script>
+</body>
+</html>

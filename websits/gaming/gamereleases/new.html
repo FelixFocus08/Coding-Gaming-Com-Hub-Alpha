@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spiel‑Releases & Events</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header><h1>🎮 Spiele-Releases & Events</h1></header>
+  <nav id="tabs">
+    <button onclick="switchFrame(0)">EventsForGamers (Kalender)</button>
+    <button onclick="switchFrame(1)">EventsForGamers (Sidebar)</button>
+    <button onclick="switchFrame(2)">Metacritic</button>
+    <button onclick="switchFrame(3)">Gamespot</button>
+  </nav>
+  <main id="iframe-container">
+    <iframe src="https://www.eventsforgamers.com/embed/calendar" frameborder="0"></iframe>
+    <iframe src="https://www.eventsforgamers.com/embed/sidebar" frameborder="0" style="display:none;"></iframe>
+    <iframe src="https://www.metacritic.com/browse/games/release-date/coming-soon/all/date" frameborder="0" style="display:none;"></iframe>
+        <iframe src="https://www.gamespot.com/new-games/" frameborder="0" style="display:none;"></iframe>
+  </main>
+  <footer>
+    <p>Achtung: Manche Presskits oder Seiten lassen sich ggf. nicht einbetten.</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KI Chatbot – Gaming & Coding</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.14.0/dist/tf.min.js"></script>
+  <script defer src="chatbot.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>💬 KI Chatbot</h1>
+      <button id="mode-toggle">🌙</button>
+    </header>
+
+    <main>
+      <div class="avatar-container">
+        <img id="avatar" src="avatar.svg" alt="Bot Avatar" />
+      </div>
+
+      <div class="chat-box" id="chat-box"></div>
+
+      <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Stelle eine Frage zu Gaming oder Coding..." />
+        <button id="send-btn">Senden</button>
+        <button id="speech-btn">🎤</button>
+      </div>
+
+      <div class="faq-section">
+        <h2>📚 Häufige Fragen</h2>
+        <div class="faq-category-buttons">
+          <button class="faq-btn" data-category="gaming">Gaming</button>
+          <button class="faq-btn" data-category="coding">Coding</button>
+          <button class="faq-btn" data-category="allgemein">Allgemein</button>
+        </div>
+        <div class="faq-list" id="faq-list"></div>
+      </div>
+
+      <div class="training-link">
+        <a href="training.html">🧠 Eigenes Modell trainieren</a>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Dein Projekt – KI Bot für Gaming & Coding</p>
+    </footer>
+  </div>
+</body>
+</html>

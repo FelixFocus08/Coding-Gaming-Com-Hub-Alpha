@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+<title>Code-Lexikon</title>
+<style>
+  body {
+    background-color: #000;
+    color: #0f0;
+    font-family: Consolas, monospace;
+    padding: 1em;
+  }
+  select {
+    padding: 0.5em 1em;
+    font-size: 1em;
+    color: #0f0;
+    background: rgba(0,255,0,0.1);
+    border: none;
+    border-radius: 8px;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    margin-bottom: 1em;
+  }
+    select:focus {
+        outline: none;
+        border: 1px solid #0f0;
+    }
+
+    select option {
+        background-color: #000;
+        color: #0f0;
+    }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #0f0;
+    padding: 0.5em;
+  }
+  th {
+    background-color: rgba(0,255,0,0.2);
+  }
+  button {
+    background-color: transparent;
+    border: 1px solid #0f0;
+    color: #0f0;
+    padding: 0.3em 0.6em;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  button:hover {
+    background-color: #0f0;
+    color: #000;
+  }
+  pre {
+    background: rgba(0,255,0,0.1);
+    border: 1px solid #0f0;
+    padding: 1em;
+    white-space: pre-wrap;
+    margin-top: 0.5em;
+    display: none;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+    <a href="/Main/starter-page/index.html"><span class="material-symbols-rounded">home</span>Home</a>
+</header>
+
+<h1>Code-Lexikon</h1>
+<p>Wähle eine Programmiersprache aus, um die entsprechenden Code-Beispiele zu sehen.</p>
+<label for="sprache">Sprache wählen:</label>
+<select id="sprache">
+  <option value="html">HTML</option>
+  <option value="css">CSS</option>
+  <option value="javascript">JavaScript</option>
+  <option value="cpp">C++</option>
+  <option value="python">Python</option>
+  <option value="csharp">C#</option>
+  <option value="c">C</option>
+</select>
+
+<table id="codeTable">
+  <thead><tr id="tableHead"></tr></thead>
+  <tbody id="tableBody"></tbody>
+</table>
+
+<script src="sprachen_data.js"></script>
+<script>
+  const spracheSelect = document.getElementById('sprache');
+  const tableHead = document.getElementById('tableHead');
+  const tableBody = document.getElementById('tableBody');
+
+  function ladeTabelle(sprache) {
+    const daten = sprachenData[sprache];
+    // Kopfzeile
+    tableHead.innerHTML = "";
+    daten.kopf.forEach(kopf => {
+      const th = document.createElement('th');
+      th.textContent = kopf;
+      tableHead.appendChild(th);
+    });
+
+    // Body
+    tableBody.innerHTML = "";
+    daten.zeilen.forEach((zeile, index) => {
+      const tr = document.createElement('tr');
+      zeile.forEach((zelle, i) => {
+        const td = document.createElement('td');
+        if(i === 2){
+          // Code + Button
+          const btn = document.createElement('button');
+          btn.textContent = "Code anzeigen";
+          const pre = document.createElement('pre');
+          pre.textContent = zelle;
+          btn.onclick = () => {
+            if(pre.style.display === 'block'){
+              pre.style.display = 'none';
+              btn.textContent = "Code anzeigen";
+            } else {
+              pre.style.display = 'block';
+              btn.textContent = "Code verstecken";
+            }
+          };
+          td.appendChild(btn);
+          td.appendChild(pre);
+        } else {
+          td.textContent = zelle;
+        }
+        tr.appendChild(td);
+      });
+      tableBody.appendChild(tr);
+    });
+  }
+
+  spracheSelect.addEventListener('change', e => {
+    ladeTabelle(e.target.value);
+  });
+
+  // Initial laden
+  ladeTabelle(spracheSelect.value);
+</script>
+
+</body>
+</html>

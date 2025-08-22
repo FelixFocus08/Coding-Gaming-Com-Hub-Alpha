@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passwort Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-mono flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md bg-gray-800 rounded-2xl shadow-lg p-6">
+        <h1 class="text-xl font-bold text-green-400 text-center mb-4">🔐 Passwort Generator</h1>
+
+        <label class="block mb-2">Länge des Passworts:</label>
+        <input type="number" id="lengthInput" value="16" min="4" max="64"
+               class="w-full px-4 py-2 rounded bg-gray-700 text-white focus:outline-none mb-4">
+
+        <label class="block mb-2">Optionen:</label>
+        <div class="mb-4 space-y-2">
+            <label><input type="checkbox" id="includeUppercase" checked> Großbuchstaben</label><br>
+            <label><input type="checkbox" id="includeNumbers" checked> Zahlen</label><br>
+            <label><input type="checkbox" id="includeSymbols" checked> Sonderzeichen</label>
+        </div>
+
+        <button onclick="generatePassword()"
+                class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded mb-4">
+            Passwort generieren
+        </button>
+
+        <input type="text" id="passwordOutput" readonly
+               class="w-full px-4 py-2 rounded bg-gray-700 text-green-400 font-bold text-center mb-2">
+
+        <div id="strengthMeter" class="text-center text-sm text-gray-300"></div>
+    </div>
+
+    <script>
+        function generatePassword() {
+            const length = parseInt(document.getElementById('lengthInput').value);
+            const includeUppercase = document.getElementById('includeUppercase').checked;
+            const includeNumbers = document.getElementById('includeNumbers').checked;
+            const includeSymbols = document.getElementById('includeSymbols').checked;
+
+            const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+            const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const numbers = '0123456789';
+            const symbols = '!@#$%^&*()-_=+[]{};:,.<>?';
+
+            let charset = lowercase;
+            if (includeUppercase) charset += uppercase;
+            if (includeNumbers) charset += numbers;
+            if (includeSymbols) charset += symbols;
+
+            if (charset.length === 0) {
+                alert("Bitte wähle mindestens eine Zeichenoption!");
+                return;
+            }
+
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+
+            document.getElementById('passwordOutput').value = password;
+            updateStrength(length, includeUppercase, includeNumbers, includeSymbols);
+        }
+
+        function updateStrength(length, upper, numbers, symbols) {
+            let score = length;
+            if (upper) score += 5;
+            if (numbers) score += 5;
+            if (symbols) score += 5;
+
+            let strengthText = '';
+            if (score < 15) {
+                strengthText = '🔴 Schwach';
+            } else if (score < 25) {
+                strengthText = '🟠 Mittel';
+            } else {
+                strengthText = '🟢 Stark';
+            }
+
+            document.getElementById('strengthMeter').innerText = `Sicherheitsbewertung: ${strengthText}`;
+        }
+    </script>
+</body>
+</html>

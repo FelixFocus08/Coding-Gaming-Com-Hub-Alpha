@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coding News – Gaming & Coding Hub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="page-header coding-theme">
+    <h1>Coding News & Ressourcen</h1>
+    <p>Die wichtigsten Infos und Tutorials aus der Welt des Programmierens.</p>
+  </header>
+
+  <main class="news-section coding-style">
+    <div class="news-card fade-in">
+      <h2>💻 Allgemeine Coding-News</h2>
+      <iframe src="https://www.heise.de/developer/" width="100%" height="400" loading="lazy"></iframe>
+    </div>
+
+    <div class="news-card fade-in">
+      <h2>🔤 HTML News & Guides</h2>
+      <iframe src="https://developer.mozilla.org/de/docs/Web/HTML" width="100%" height="400" loading="lazy"></iframe>
+    </div>
+
+    <div class="news-card fade-in">
+      <h2>🎨 CSS News & Beispiele</h2>
+      <iframe src="https://developer.mozilla.org/de/docs/Web/CSS" width="100%" height="400" loading="lazy"></iframe>
+    </div>
+
+    <div class="news-card fade-in">
+      <h2>📜 JavaScript News & Dokus</h2>
+      <iframe src="https://developer.mozilla.org/de/docs/Web/JavaScript" width="100%" height="400" loading="lazy"></iframe>
+    </div>
+
+    <div class="news-card fade-in">
+      <h2>🐍 Python Ressourcen & Tipps</h2>
+      <iframe src="https://realpython.com/" width="100%" height="400" loading="lazy"></iframe>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Gaming & Coding Hub. Alle Rechte vorbehalten.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in-visible");
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll(".fade-in").forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

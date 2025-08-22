@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modell Training – KI Chatbot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>🧠 KI Training</h1>
+      <a href="index.html">⬅️ Zurück</a>
+    </header>
+
+    <main>
+      <p>Hier kannst du neue Trainingsdaten für deinen Chatbot eingeben und das Modell lokal erweitern.</p>
+
+      <form id="training-form">
+        <label>Intent:
+          <input type="text" name="intent" required placeholder="z.B. frage_gaming" />
+        </label>
+
+        <label>Beispiel-Sätze:
+          <textarea name="examples" required placeholder="z.B. Was sind gute PC-Games?\nWelche Spiele sind beliebt?"></textarea>
+        </label>
+
+        <label>Antwort:
+          <textarea name="response" required placeholder="z.B. Aktuell sind Elden Ring, Valorant und Minecraft sehr gefragt!"></textarea>
+        </label>
+
+        <button type="submit">🧠 Hinzufügen</button>
+      </form>
+
+      <div id="training-status"></div>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Dein Projekt – Chatbot Training</p>
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById('training-form');
+    const statusDiv = document.getElementById('training-status');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      const examples = data.examples.split('\n').map(e => e.trim()).filter(e => e);
+      const newData = {
+        intent: data.intent,
+        examples,
+        response: data.response
+      };
+
+      let chatbotData = JSON.parse(localStorage.getItem('customIntents') || '[]');
+      chatbotData.push(newData);
+      localStorage.setItem('customIntents', JSON.stringify(chatbotData));
+      statusDiv.textContent = '✅ Trainingsdaten gespeichert!';
+      form.reset();
+    });
+  </script>
+</body>
+</html>

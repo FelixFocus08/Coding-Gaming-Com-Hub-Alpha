@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Hub – Gaming & Coding Hub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>Social Media & Livestreams</h1>
+    <p>Folge uns überall – bleibe verbunden mit Gaming & Coding!</p>
+  </header>
+
+  <main class="social-section">
+    <div class="social-grid">
+      <!-- Twitch -->
+      <a href="https://www.twitch.tv/fel1g0r" target="_blank" class="social-card twitch">
+        <img src="https://img.icons8.com/color/96/000000/twitch--v1.png" alt="Twitch Icon">
+        <h3>Twitch Stream</h3>
+        <p>Live Gaming & Dev-Streams. Verpasse keine Action!</p>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/felig0r?igsh=Nnh2M2QyeGE2dHZu" target="_blank" class="social-card insta">
+        <img src="https://img.icons8.com/color/96/000000/instagram-new--v1.png" alt="Instagram Icon">
+        <h3>Instagram</h3>
+        <p>Behind the Scenes, Reels & Story Updates.</p>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@feligor08?_t=ZN-8ucO6CSxOqs&_r=1" target="_blank" class="social-card tiktok">
+        <img src="https://img.icons8.com/color/96/000000/tiktok--v1.png" alt="TikTok Icon">
+        <h3>TikTok</h3>
+        <p>Kurzvideos mit Gaming-Humor und Coding-Life.</p>
+      </a>
+
+      <!-- YouTube (Hauptkanal) -->
+      <a href="https://www.youtube.com/@Felix_Focus" target="_blank" class="social-card youtube">
+        <img src="https://img.icons8.com/color/96/000000/youtube-play.png" alt="YouTube Icon">
+        <h3>YouTube – Felix Focus</h3>
+        <p>Projekte, Tutorials, Showcases.</p>
+      </a>
+
+      <!-- YouTube (Zweitkanal) -->
+      <a href="https://www.youtube.com/@feligor0812" target="_blank" class="social-card youtube">
+        <img src="https://img.icons8.com/color/96/000000/youtube-play.png" alt="YouTube Icon">
+        <h3>YouTube – Feligor</h3>
+        <p>Clips, Challenges & Experimente.</p>
+      </a>
+
+      <!-- Discord -->
+      <a href="https://discord.gg/6ZPskNPHXC" target="_blank" class="social-card discord">
+        <img src="https://img.icons8.com/color/96/000000/discord--v2.png" alt="Discord Icon">
+        <h3>Discord Community</h3>
+        <p>Chatte mit uns, stelle Fragen, mach mit!</p>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Gaming & Coding Hub. Alle Rechte vorbehalten.</p>
+  </footer>
+
+  <script>
+    // Fade-in Effekt bei Scroll
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in-visible");
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll(".social-card").forEach(card => {
+        card.classList.add("fade-in");
+        observer.observe(card);
+      });
+    });
+  </script>
+</body>
+</html>

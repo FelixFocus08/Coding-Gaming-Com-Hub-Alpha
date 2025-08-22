@@ -1,0 +1,318 @@
+/* ===== Variablen für Dark & Light Mode ===== */
+:root {
+  --bg-color: #12131a;
+  --text-color: #ddd;
+  --text-muted: #888abf;
+  --header-bg: #1a1a2e;
+  --footer-bg: #1a1a2e;
+  --neon-blue: #5566ff;
+  --neon-violet: #aa88ff;
+}
+body.light-mode {
+  --bg-color: #f9f9fb;
+  --text-color: #222;
+  --text-muted: #666688;
+  --header-bg: #e0e0ff;
+  --footer-bg: #e0e0ff;
+}
+
+/* ===== Grundlayout ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+header.page-header {
+  padding: 2rem 1rem;
+  text-align: center;
+  background: var(--header-bg);
+  box-shadow: 0 2px 10px rgba(85, 102, 255, 0.3);
+  -webkit-user-select: none;
+  user-select: text;
+}
+header.page-header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.5rem;
+  animation: neon-glow 3s ease-in-out infinite alternate;
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 5px var(--neon-blue),
+    0 0 10px var(--neon-violet),
+    0 0 20px var(--neon-blue),
+    0 0 40px var(--neon-violet);
+}
+header.page-header p {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+/* Neon Glow Animation */
+@keyframes neon-glow {
+  0%, 100% {
+    text-shadow:
+      0 0 5px var(--neon-blue),
+      0 0 10px var(--neon-violet),
+      0 0 20px var(--neon-blue),
+      0 0 40px var(--neon-violet);
+  }
+  50% {
+    text-shadow:
+      0 0 10px var(--neon-violet),
+      0 0 25px var(--neon-blue),
+      0 0 50px var(--neon-violet),
+      0 0 80px var(--neon-blue);
+  }
+}
+
+/* Navbar Styling */
+.navbar-list {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  padding: 0.5rem 1rem;
+  margin: 1rem auto 2rem;
+  max-width: 900px;
+  background-color: var(--header-bg);
+  border-radius: 10px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.navbar-item {
+  border-radius: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.navbar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: color 0.3s ease;
+  position: relative;
+}
+.icon svg {
+  width: 24px;
+  height: 24px;
+  fill: #bbbfff;
+  filter: drop-shadow(0 0 3px #8888ff);
+  transition: fill 0.3s ease, filter 0.3s ease;
+}
+.navbar-link:hover,
+.navbar-link:focus {
+  color: var(--neon-blue);
+  outline: none;
+}
+.navbar-link:hover .icon svg,
+.navbar-link:focus .icon svg {
+  fill: var(--neon-blue);
+  filter:
+    drop-shadow(0 0 8px var(--neon-blue))
+    drop-shadow(0 0 14px var(--neon-violet));
+}
+.navbar-item:hover,
+.navbar-item:focus-within {
+  background-color: #2a2a55;
+  box-shadow: 0 0 15px var(--neon-blue)aa;
+  cursor: pointer;
+}
+.navbar-link:focus-visible {
+  outline: 2px solid var(--neon-blue);
+  outline-offset: 2px;
+}
+
+/* Main Bereich */
+main.discord-section {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.discord-info ul {
+  list-style: none;
+  padding-left: 0;
+}
+.discord-info li {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+/* Discord Link Gestaltung */
+.discord-link {
+  display: inline-block;
+  margin: 1rem 0 2rem;
+  padding: 0.5rem 1rem;
+  background: var(--neon-blue);
+  color: #eef0ff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-radius: 10px;
+  box-shadow:
+    0 0 8px var(--neon-blue),
+    0 0 20px var(--neon-violet);
+  transition: background-color 0.3s ease;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.discord-link:hover,
+.discord-link:focus {
+  background: var(--neon-violet);
+  box-shadow:
+    0 0 15px var(--neon-violet),
+    0 0 30px var(--neon-blue);
+  outline: none;
+}
+
+/* Discord iFrame Styling */
+.discord-widget iframe {
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  border-radius: 12px;
+  background-color: #2c2f33;
+  border: none;
+  box-shadow: 0 0 20px var(--neon-blue);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: var(--footer-bg);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  -webkit-user-select: none;
+  user-select: text;
+}
+
+/* Dark/Light Mode Toggle Button */
+#darkModeToggle {
+  position: fixed;
+  top: .9rem;
+  right: 1rem;
+  background: transparent;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+  padding: 0.5rem 0.8rem;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  z-index: 1000;
+  -webkit-user-select: none;
+  user-select: none;
+  box-shadow: 0 0 10px var(--neon-blue)aa;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+#darkModeToggle:hover {
+  background-color: var(--neon-blue);
+  color: #eef0ff;
+  border-color: var(--neon-blue);
+}
+
+/* Scrollbar (optional) */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--neon-blue)88;
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .navbar-list {
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+}
+
+/* Dunklere Neonfarben für Light Mode */
+body.light-mode {
+  --bg-color: #f9f9fb;
+  --text-color: #222;
+  --text-muted: #555577;
+  --header-bg: #d0d0f5;
+  --footer-bg: #d0d0f5;
+
+  /* Dunklere Neon Light Mode Farben */
+  --neon-blue: #254bff;    /* kräftiges dunkles Blau */
+  --neon-violet: #6f4dff; /* dunkles kräftiges Violett */
+}
+
+/* Dunklere Neon-Glowing Text Animation für Light Mode */
+body.light-mode header.page-header h1,
+body.light-mode .navbar-link,
+body.light-mode .discord-link {
+  animation: neon-glow-light 3s ease-in-out infinite alternate;
+  background: linear-gradient(45deg, var(--neon-blue), var(--neon-violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 8px var(--neon-blue),
+    0 0 16px var(--neon-violet),
+    0 0 32px var(--neon-blue),
+    0 0 64px var(--neon-violet);
+}
+
+@keyframes neon-glow-light {
+  0%, 100% {
+    text-shadow:
+      0 0 8px var(--neon-blue),
+      0 0 16px var(--neon-violet),
+      0 0 32px var(--neon-blue),
+      0 0 64px var(--neon-violet);
+  }
+  50% {
+    text-shadow:
+      0 0 16px var(--neon-violet),
+      0 0 40px var(--neon-blue),
+      0 0 80px var(--neon-violet),
+      0 0 120px var(--neon-blue);
+  }
+}
+
+/* Icons im Light Mode mit dunkler Neon-Glut */
+body.light-mode .icon svg {
+  filter:
+    drop-shadow(0 0 7px var(--neon-blue))
+    drop-shadow(0 0 14px var(--neon-violet));
+  transition: filter 0.3s ease;
+}
+body.light-mode .navbar-link:hover .icon svg,
+body.light-mode .navbar-link:focus .icon svg {
+  filter:
+    drop-shadow(0 0 18px var(--neon-violet))
+    drop-shadow(0 0 36px var(--neon-blue));
+}
+
+/* Discord-Link Hover Light Mode */
+body.light-mode .discord-link:hover,
+body.light-mode .discord-link:focus {
+  background:
+    linear-gradient(45deg, var(--neon-violet), var(--neon-blue));
+  box-shadow:
+    0 0 24px var(--neon-violet),
+    0 0 48px var(--neon-blue);
+  color: #eef0ff;
+}
