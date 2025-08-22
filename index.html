@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaming & Coding Hub</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark-mode">
+  <nav aria-label="Hauptnavigation">
+    <!-- Sidebar für Mobile -->
+    <!-- Mobile Sidebar Navigation -->
+<ul class="sidebar" role="menu" aria-label="Mobile Navigation">
+  <li>
+    <button class="glass-close-button" aria-label="Sidebar schließen" onclick="hideSidebar()">✕</button>
+  </li>
+  <li role="none">
+    <a href="#gaming" role="menuitem" tabindex="0">🎮 Gaming</a>
+  </li>
+  <li role="none">
+    <a href="/Second/Coding/index.html" role="menuitem" tabindex="0">💻 Coding</a>
+  </li>
+  <li role="none">
+    <a href="#projects" role="menuitem" tabindex="0">📂 Projekte</a>
+  </li>
+  <li role="none">
+    <a href="#about" role="menuitem" tabindex="0">ℹ️ Über uns</a>
+  </li>
+  <li role="none">
+    <a href="#forum" role="menuitem" tabindex="0">💬 Forum</a>
+  </li>
+</ul>
+
+
+<!-- Desktop Navigation -->
+<div class="navbar-container">
+  <div class="nav-left">
+    <a href="#" class="logo" tabindex="0">Gaming & Coding</a>
+  </div>
+
+  <ul class="nav-center hideOnMobile" role="menubar" aria-label="Hauptmenü">
+    <li class="dropdown" role="none">
+      <a href="#gaming" class="dropdown-btn" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="0">🎮 Gaming</a>
+      <ul class="dropdown-content" role="menu" aria-label="Gaming Untermenü">
+        <li role="none"><a href="#new-releases" role="menuitem" tabindex="0">Neue Releases</a></li>
+        <li role="none"><a href="#reviews" role="menuitem" tabindex="0">Reviews</a></li>
+        <li role="none"><a href="#tournaments" role="menuitem" tabindex="0">Turniere</a></li>
+        <li role="none"><a href="#community" role="menuitem" tabindex="0">Community</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown" role="none">
+      <a href="/Second/Coding/index.html" class="dropdown-btn" role="menuitem" aria-haspopup="true" aria-expanded="false" tabindex="0">💻 Coding</a>
+      <ul class="dropdown-content" role="menu" aria-label="Coding Untermenü">
+        <li role="none"><a href="#projects" role="menuitem" tabindex="0">Projekte</a></li>
+        <li role="none"><a href="#tutorials" role="menuitem" tabindex="0">Tutorials</a></li>
+        <li role="none"><a href="#tools" role="menuitem" tabindex="0">Tools</a></li>
+        <li role="none"><a href="#tips" role="menuitem" tabindex="0">Tipps</a></li>
+        <li role="none"><a href="/Second/Coding/Sprachen Seite/index.html" role="menuitem" tabindex="0">languages</a></li>
+      </ul>
+    </li>
+
+    <li role="none"><a href="#projects" role="menuitem" tabindex="0">📂 Projekte</a></li>
+    <li role="none"><a href="#about" role="menuitem" tabindex="0">ℹ️ Über uns</a></li>
+    <li role="none"><a href="#forum" role="menuitem" tabindex="0">💬 Forum</a></li>
+  </ul>
+</div>
+
+
+      <div class="nav-right">
+        <button class="settings-btn" aria-label="Einstellungen öffnen" onclick="toggleSettingsPanel()">⚙️</button>
+        <button class="menuButton" aria-label="Sidebar öffnen" onclick="showSidebar()">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <aside id="settings-panel" class="settings-panel" role="region" aria-label="Einstellungen" tabindex="-1">
+    <h3>Einstellungen</h3>
+    <button id="langToggleBtn" aria-label="Sprache umschalten">Deutsch 🇩🇪</button>
+    <button id="mode-btn" aria-label="Dark Mode umschalten" title="Dark Mode umschalten"></button>
+
+    <label for="volume-control">🔊 Lautstärke:</label>
+    <input type="range" min="0" max="100" value="50" id="volume-control" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+
+    <label for="notifications-toggle">🔔 Benachrichtigungen:</label>
+    <input type="checkbox" id="notifications-toggle" checked aria-checked="true">
+
+    <select aria-label="Optionen Auswahl 1">
+      <option>Option 1</option>
+      <option>Option 2</option>
+      <option>Option 3</option>
+      <option>Option 4</option>
+    </select>
+    <select aria-label="Optionen Auswahl 2">
+      <option>Auswahl A</option>
+      <option>Auswahl B</option>
+      <option>Auswahl C</option>
+      <option>Auswahl D</option>
+    </select>
+    <select aria-label="Optionen Auswahl 3">
+      <option>Menü 1</option>
+      <option>Menü 2</option>
+      <option>Menü 3</option>
+      <option>Menü 4</option>
+    </select>
+    <select aria-label="Optionen Auswahl 4">
+      <option>Punkt 1</option>
+      <option>Punkt 2</option>
+      <option>Punkt 3</option>
+      <option>Punkt 4</option>
+    </select>
+
+    <button onclick="toggleSettingsPanel()" class="glass-close-button" aria-label="Einstellungen schließen" title="Einstellungen schließen">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor" aria-hidden="true">
+        <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+      </svg>
+    </button>
+  </aside>
+
+  <main>
+    <header class="hero" id="top">
+      <h1>Willkommen im Gaming & Coding Hub</h1>
+      <p>Entdecke spannende Games und entwickle coole Projekte!</p>
+      <button onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">Starte jetzt</button>
+    </header>
+
+    <section id="gaming" class="cards-section" tabindex="-1" aria-label="Gaming Bereich">
+      <h2>Gaming-Welt</h2>
+      <div class="card-grid">
+        <a href="/websits/gaming/gamereleases/new.html" class="card glass">🎮 Neue Spiele-Releases</a>
+        <div class="card glass">🕹️ Game Reviews & Tipps</div>
+        <div class="card glass">👾 Community-Turniere</div>
+      </div>
+    </section>
+
+    <section id="coding" class="cards-section" tabindex="-1" aria-label="Coding Bereich">
+      <h2>Coding-Bereich</h2>
+      <div class="card-grid">
+        <div class="card glass">💻 Projekte & Tutorials</div>
+        <div class="card glass">🛠️ Tools & Ressourcen</div>
+        <div class="card glass">📊 Tipps für Anfänger</div>
+      </div>
+    </section>
+
+    <section id="projects" class="projects" tabindex="-1" aria-label="Projekte und Neuigkeiten">
+      <h2>Projekte & Neuigkeiten</h2>
+      <p>Hier findest du die neuesten Community-Projekte und Updates!</p>
+    </section>
+
+    <section id="apps" class="apps" tabindex="-1" aria-label="Webanwendungen">
+      <h2>Unsere Webanwendungen</h2>
+      <div class="app-grid">
+        <article class="app-card" tabindex="0" aria-label="TicTacToe gegen Bot">
+          <img src="/seiten/images/TicTacToe.png" alt="TicTacToe-Game" />
+          <h3>TicTacToe gegen Bot</h3>
+          <p>Spiele gegen einen Bot mit verschiedenen Schwierigkeiten</p>
+          <a href="/seiten/TicTacToe-Game/TicTacToe.html" class="play-button" aria-label="TicTacToe starten">🎮 Tic-Tac-Toe starten</a>
+        </article>
+        <article class="app-card" tabindex="0" aria-label="CodeBreaker Hacker Puzzle">
+          <img src="/seiten/images/CodeBreaker.png" alt="CodeBreaker-Game" />
+          <h3>CodeBreaker - Das Hacker Puzzle</h3>
+          <p>Knacke geheime Codes in verschiedenen Schwierigkeitsgraden!</p>
+          <a href="/seiten/webapps/CodeBreaker.html" class="play-button" aria-label="CodeBreaker starten">🎮 CodeBreaker starten</a>
+        </article>
+        <article class="app-card" tabindex="0" aria-label="Passwort Generator">
+          <img src="/seiten/images/PswGen.png" alt="Passwort Generator" />
+          <h3>Passwort Generator</h3>
+          <p>Erstelle dein sicheres Passwort – Daten bleiben lokal.</p>
+          <a href="/seiten/webapps/PasswortGenerator.html" class="play-button" aria-label="Passwort Generator starten">🔐 PasswortGenerator</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>© 2025 Gaming & Coding Hub</p>
+    <p>
+      <a href="#" tabindex="0">Discord</a> |
+      <a href="#" tabindex="0">GitHub</a> |
+      <a href="#" tabindex="0">Kontakt</a>
+    </p>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" aria-live="polite" aria-atomic="true" role="alert" class="toast"></div>
+
+  <!-- Scroll-To-Top Button -->
+  <button id="scrollTopBtn" aria-label="Nach oben scrollen" title="Nach oben scrollen">⬆️</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
